@@ -1,4 +1,4 @@
-#A Windows Terminal Based Snake Game
+# A Windows Terminal Based Snake Game
 
 A Classic snake game witten in C for the windows terminal. The game features multiplayer and a single player mode additionally it has a Highscore Tracker.
 
@@ -27,5 +27,5 @@ Since this is a C project, you need to compile it first.
     ./snake_game
     ```
 ## Controls
-**Sigleplayer Mode** WASD
-**Multiplayer Mode** player_1 --> WASD player_2 ---> Arrow Keys
+* **Sigleplayer Mode** WASD
+* **Multiplayer Mode** player_1 --> WASD player_2 ---> Arrow Keys
