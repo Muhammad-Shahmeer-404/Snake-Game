@@ -13,7 +13,7 @@ Since this is a C project, you need to compile it first.
 
 1.  **Clone the repository:**
     ```bash
-    git clone git@github.com:Muhammad-Shahmeer-404/snake-game-c.git
+    git clone git@github.com:Muhammad-Shahmeer-404/Snake-game-c.git
     cd snake-game-c
     ```
 
