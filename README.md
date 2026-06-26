@@ -1,4 +1,4 @@
-# A Windows Terminal Based Snake Game
+# A Linux Terminal Based Snake Game
 
 A Classic snake game witten in C++ for the Linux terminal.
 
