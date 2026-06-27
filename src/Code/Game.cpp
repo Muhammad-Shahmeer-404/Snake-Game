@@ -2,23 +2,34 @@
 #include <cstdlib>
 #include <ctime>
 #include <string>
-#include<cwchar>
+#include <cwchar>
 #include "Windows.h"
 
 wchar_t snakeSymbol  = L'█'; 
 wchar_t fruitSymbol  = L'▄'; 
 
 
-int gameover      = 0;
-int score         = 0;
-int boderPadding  = 5;
-int letterPadding = boderPadding - 2;
+int gameover        = 0;
+int score           = 0;
+int boderPadding    = 10;
+int letterPadding   = boderPadding - 2;
+int obstaclePadding = boderPadding + 5;
+int IncreaseFactor  = 1;
+
+bool needsObstacle = false;
+
+const int maxlenght      = 50;
+const int maxObstacles   = 50;
+int  currentLenght       = 1;
+int  currentObstacle     = 0;
+wchar_t ScoreString[]    = L"Score:";
 
 
-const int maxlenght = 50;
-int  currentLenght  = 1;
-wchar_t ScoreString[] = L"Score:";
-
+typedef struct
+{
+    int pos_x;
+    int pos_y;
+}obstacle;
 
 typedef struct 
 {
@@ -35,6 +46,7 @@ typedef struct
 
 snake s[maxlenght];
 fruit f;
+obstacle ob[maxObstacles];
 
 int getPosX()
 {
@@ -44,6 +56,23 @@ int getPosX()
 int getPosY()
 {
     return s[0].pos_y;
+}
+
+void generateObstacle(Window &w)
+{
+    if((currentObstacle < maxlenght))
+    {
+        srand(time(0));
+        ob[currentObstacle].pos_x = rand() % (w.getHeight() - obstaclePadding);
+	    ob[currentObstacle].pos_y = rand () % (w.getWidth() - obstaclePadding);
+	    while (ob[currentObstacle].pos_x == 0 || ob[currentObstacle].pos_y == 0 || 
+        ob[currentObstacle].pos_x == f.pos_x || ob[currentObstacle].pos_y == f.pos_y)
+        {
+		    ob[currentObstacle].pos_y = rand () % (w.getWidth() - obstaclePadding);
+	        ob[currentObstacle].pos_x = rand () % (w.getHeight() - obstaclePadding);
+        }
+        currentObstacle++;
+    }   
 }
 
 void generateBorder(Window &w)
@@ -89,6 +118,15 @@ void displayScore(Window &w)
     }
 }
 
+void increaseLenght()
+{
+    if(currentLenght < maxlenght && IncreaseFactor < 8)
+    {
+        if (score % 5 == 0 && score != 0)IncreaseFactor += 3;
+        currentLenght +=IncreaseFactor;
+    }
+}
+
 void setUp(int height, int width, Window &w)
 {
     generateBorder(w);
@@ -110,6 +148,17 @@ void collitionCheck(Window &w)
             return;
         }    
     }
+    if(currentObstacle > 0)
+    {
+        for(int i = 0; i < currentObstacle; ++i)
+        {
+            if(s[0].pos_x == ob[i].pos_x && s[0].pos_y == ob[i].pos_y)
+            {
+                gameover = 1;
+                return;
+            }
+        }
+    }
     if(s[0].pos_y == 0 ||  s[0].pos_x == 0)
     {
         gameover = 1;
@@ -120,12 +169,16 @@ void collitionCheck(Window &w)
         gameover = 1;
         return;
     }
-
     if(f.pos_x == s[0].pos_x && f.pos_y == s[0].pos_y)
     {
         generateFruit(w);
-        currentLenght++;
+        increaseLenght();
         score++;
+
+        if(score % 2 == 0 && score != 0)
+        {
+            needsObstacle = true;
+        }
     }
 }
 
@@ -135,6 +188,20 @@ void display(Window &w)
     for(int i = 1; i < currentLenght; ++i)
     {
         w.setChar(s[i].pos_x, s[i].pos_y, snakeSymbol, 0);
+    }
+
+    while(needsObstacle)
+    {
+        generateObstacle(w);
+        needsObstacle = false;
+    }
+
+    if(currentObstacle > 0)
+    {
+        for(int i = 0; i < currentObstacle; ++i)
+        {
+            w.setChar(ob[i].pos_x, ob[i].pos_y, snakeSymbol, MAGENTA);
+        }
     }
 
     w.setChar(s[0].pos_x, s[0].pos_y, snakeSymbol, BLUE);

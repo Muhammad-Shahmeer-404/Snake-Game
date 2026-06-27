@@ -38,7 +38,9 @@ int main()
             myWindow.flush();
         }
     }
-    sleep(2);
+    if(c != 'q'){
+        sleep(2);   
+    }
     std::wcout << "\x1b[?25h";
     std::wcout << "\x1B[2J" << "\x1b[H";
     
