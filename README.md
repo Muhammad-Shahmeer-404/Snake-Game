@@ -1,11 +1,16 @@
-# A Linux Terminal Based Snake Game
+<div> align="center">
+
+# A Linux Terminal Based Snake Game    
+
+</div>
 
 A Classic snake game witten in C++ for the Linux terminal.
 
-Features
+## Features
 * **Single Player:** Classic snake gameplay.
-* **Smooth Controls:** Optimized for Windows terminal input.
-
+* **Smooth Controls:** Optimized for Linux terminal input.
+* **HighScore:** Keeps track of your HighScore
+ 
 * How to Run
 
 1.  **Clone the repository:**
