@@ -8,6 +8,7 @@ void generateFruit(Window &w);
 void generateObstacle(Window &w);
 void collitionCheck(Window &w);
 void display(Window &w);
+void updateHighScore();
 int getPosX();
 int getPosY();
 

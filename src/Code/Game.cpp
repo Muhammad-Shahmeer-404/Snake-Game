@@ -3,26 +3,33 @@
 #include <ctime>
 #include <string>
 #include <cwchar>
+
 #include "Windows.h"
+#include "File.h"
+
 
 wchar_t snakeSymbol  = L'█'; 
 wchar_t fruitSymbol  = L'▄'; 
 
 
 int gameover        = 0;
-int score           = 0;
 int boderPadding    = 10;
 int letterPadding   = boderPadding - 2;
 int obstaclePadding = boderPadding + 5;
 int IncreaseFactor  = 1;
 
+int HighScore  = 0;
+int score      = 0;
+
+
 bool needsObstacle = false;
 
-const int maxlenght      = 50;
-const int maxObstacles   = 50;
-int  currentLenght       = 1;
-int  currentObstacle     = 0;
-wchar_t ScoreString[]    = L"Score:";
+const int maxlenght       = 50;
+const int maxObstacles    = 50;
+int  currentLenght        = 1;
+int  currentObstacle      = 0;
+wchar_t ScoreString[]     = L"Score:";
+wchar_t HighScoreString[] = L"HighScrore: ";
 
 
 typedef struct
@@ -97,7 +104,7 @@ void generateFruit(Window &w)
     srand(time(0));
     f.pos_x = rand() % (w.getHeight() - boderPadding);
 	f.pos_y = rand () % (w.getWidth() - boderPadding);
-	while (f.pos_x == 0 || f.pos_y == 0)
+	while (f.pos_x == 0 || f.pos_y == 0 )
     {
 		f.pos_y = rand () % (w.getWidth() - boderPadding);
 	    f.pos_x = rand () % (w.getHeight() - boderPadding);
@@ -118,6 +125,19 @@ void displayScore(Window &w)
     }
 }
 
+void displayHighScore(Window &w)
+{
+    for(int i = 0; i < wcslen(HighScoreString); ++i)
+    {
+        w.setChar(w.getHeight() - letterPadding + 2, i + 1, HighScoreString[i], BLUE);
+    }
+    std::string test = std::to_string(HighScore);
+    for(int i = 0; i < test.length(); ++i)
+    {    
+        w.setChar(w.getHeight() - letterPadding + 2, wcslen(HighScoreString) + 1 + i, test[i], BLUE);
+    }
+}
+
 void increaseLenght()
 {
     if(currentLenght < maxlenght && IncreaseFactor < 8)
@@ -127,8 +147,17 @@ void increaseLenght()
     }
 }
 
+void updateHighScore()
+{
+    if (score > HighScore)
+    {
+        WriteFile(score);
+    }    
+}
+
 void setUp(int height, int width, Window &w)
 {
+    ReadFile(&HighScore);
     generateBorder(w);
     s[0].pos_x = width/2;
     s[0].pos_y = height/2;
@@ -136,6 +165,7 @@ void setUp(int height, int width, Window &w)
     w.setChar(f.pos_x, f.pos_y, fruitSymbol, RED);
     w.setChar(s[0].pos_x, s[0].pos_y, snakeSymbol, BLUE);
     displayScore(w);
+    displayHighScore(w);
 }
 
 void collitionCheck(Window &w)
@@ -208,6 +238,7 @@ void display(Window &w)
     w.setChar(f.pos_x, f.pos_y, fruitSymbol, RED);
     
     displayScore(w);
+    displayHighScore(w);
 }
 
 
