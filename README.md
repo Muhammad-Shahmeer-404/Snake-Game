@@ -1,4 +1,4 @@
-<div> align="center">
+<div align="center">
 
 # A Linux Terminal Based Snake Game    
 
