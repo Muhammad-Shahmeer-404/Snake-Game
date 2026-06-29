@@ -4,6 +4,7 @@
 #include "src/Terminal/Input.h"
 #include "src/Code/Windows.h"
 #include "src/Code/Game.h"
+#include "src/Code/File.h"
 
 struct winsize w;
 char c;
@@ -38,6 +39,7 @@ int main()
             myWindow.flush();
         }
     }
+    updateHighScore();
     if(c != 'q'){
         sleep(2);   
     }
