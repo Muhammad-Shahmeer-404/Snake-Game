@@ -13,6 +13,7 @@ A Classic snake game witten in C++ for the Linux terminal.
     <td width="50%"><img src="assets/screenshot1.png" alt="Main Menu Screenshot"></td>
     <td width="50%"><img src="assets/screenshot2.png" alt="GamePlay Screenshot"></td>
   </tr>
+</table>
 
 ## Features
 * **Game Play:** Classic snake gameplay.
