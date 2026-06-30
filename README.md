@@ -1,32 +1,36 @@
 <div align="center">
 
-# A Linux Terminal Based Snake Game    
+# ███████╗███╗   ██╗ █████╗ ██╗  ██╗███████╗ ████████╗██╗   ██╗██╗
+# ██╔════╝████╗  ██║██╔══██╗██║ ██╔╝██╔════╝ ╚══██╔══╝██║   ██║██║
+# ███████╗██╔██╗ ██║███████║█████╔╝ █████╗█████╗██║   ██║   ██║██║
+# ╚════██║██║╚██╗██║██╔══██║██╔═██╗ ██╔══╝╚════╝██║   ██║   ██║██║
+# ███████║██║ ╚████║██║  ██║██║  ██╗███████╗    ██║   ╚██████╔╝██║
+# ╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝    ╚═╝    ╚═════╝ ╚═╝
 
 </div>
 
 A Classic snake game witten in C++ for the Linux terminal.
 
+<table>
+  <tr>
+    <td width="50%"><img src="assets/images/screenshot1.png" alt="Main Menu Screenshot"></td>
+    <td width="50%"><img src="assets/images/screenshot2.png" alt="GamePlay Screenshot"></td>
+  </tr>
+
 ## Features
-* **Single Player:** Classic snake gameplay.
-* **Smooth Controls:** Optimized for Linux terminal input.
-* **HighScore:** Keeps track of your HighScore
- 
-* How to Run
+* **Game Play:** Classic snake gameplay.
+* **Smooth Controls:** Optimized for Linux terminal input using termios.
+* **HighScore:** Keeps track of your HighScore.
+* **Obstacles:** After every 2 points obstacles are generated which you would need to avoid.
 
-1.  **Clone the repository:**
-    ```bash
-    git clone git@github.com:Muhammad-Shahmeer-404/Snake-game-c.git
-    cd snake-game-c
-    ```
+### How to Run
 
-2.  **Compile the game:**
-    ```bash
+    ```bash 
+    git clone git@github.com:Muhammad-Shahmeer-404/Snake-Game.git
+    cd Snake-Game
     ./build.sh
-    ```
-
-3.  **Run it:**
-    ```bash
-    ./snake-game
+    ./snaketui 
     ```
 ## Controls
-* **Sigleplayer Mode** WASD
+* **Snake Movement:** WASD
+* **Main Menu control:** j/k (up/down) Enter to select
